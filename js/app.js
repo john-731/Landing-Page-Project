@@ -7,6 +7,7 @@ const sections = document.querySelectorAll('section');
 const navBuilder = () => {    
 
     let navUI = '';
+    //Iterating over all sections
     sections.forEach(section => {
                      
         const sectionID = section.id;
@@ -14,58 +15,40 @@ const navBuilder = () => {
                      
         navUI += `<li><a class="menu__link" href="#${sectionID}">${sectionDataNav}</a></li>`;
 });
+    //Appending all elements to the navigation bar
     navigation.innerHTML = navUI;
 };
 navBuilder();
 
 
-
-
-
-// check which element is active
-function getActiveElem() {
-    maxSection = sections[0];
-    minVal = 1000000;
-    for (item of sections) {
-        let bounding = item.getBoundingClientRect();
-        if (bounding.top > -300 & bounding.top < minVal) {
-            minVal = bounding.top;
-            maxSection = item;
-        };
-    };
-    return maxSection;
+//Getting the largest value that is less than or equal to the number
+const offset = (section) => {
+    return Math.floor(section.getBoundingClientRect().top);
 };
 
-// Add class 'active' to section when near top of viewport
-function setActive () {
-    window.addEventListener('scroll', function (event) {
-        let section = getActiveElem();
+//Removing the active class
+const removeActive = (section) => {
+    section.classList.remove('your-active-class');
+};
+
+//Adding the active class
+const addActive = (condition, section) => {
+    if(condition){
         section.classList.add('your-active-class');
-        // set other sections as inactive
-        for (let item of sections) {
-            if (item.id != section.id & item.classList.contains('your-active-class')) {
-                item.classList.remove('your-active-class');
-            }
-        }
-        // set corresponding header style
-        const active = document.querySelector('li[data-nav="' + section.id + '"]');
-        active.classList.add('active__link');
-        // remove from other headers
-        const headers = document.querySelectorAll('.menu__link');
-        for (let item of headers) {
-            console.log(item);
-            if (item.dataset.nav != active.dataset.nav & item.classList.contains('active__link')) {
-                item.classList.remove('active__link');
-            }
-        };
+    };
+};
+
+//Implementing the actual function
+const sectionActivation = () => {
+    sections.forEach(section => {
+        const elementOffset = offset(section);
+        
+        inviewport = () => elementOffset < 150 && elementOffset >= -150;
+        addActive(inviewport(), section);
+        
+        removeActive(section);
+        addActive(inviewport(), section);
     });
 };
 
-
-// Build menu 
-
-// Scroll to section on link click
-
-
-// Set sections as active
-setActive();
+window.addEventListener('scroll', sectionActivation);
