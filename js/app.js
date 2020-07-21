@@ -1,54 +1,36 @@
-//Defining Global Variables
-const navigation = document.getElementById('navbar__list');
+//__________Defining global variables________________________________________________________________________
 const sections = document.querySelectorAll('section');
+const list = document.getElementById('navbar__list');
+//const link = document.querySelectorAll('a');
 
 
-//Building the navigation bar
-const navBuilder = () => {    
 
-    let navUI = '';
-    //Iterating over all sections
-    sections.forEach(section => {
-                     
+//__________Building the nav_________________________________________________________________________________
+function navBuild(sections) {
+    
+    for (const section of sections) {
         const sectionID = section.id;
-        const sectionDataNav = section.dataset.nav;
-                     
-        navUI += `<li><a class="menu__link" href="#${sectionID}">${sectionDataNav}</a></li>`;
-});
-    //Appending all elements to the navigation bar
-    navigation.innerHTML = navUI;
-};
-navBuilder();
-
-
-//Getting the largest value that is less than or equal to the number
-const offset = (section) => {
-    return Math.floor(section.getBoundingClientRect().top);
+        const sectionDN = section.dataset.nav;              
+        list.innerHTML += `<li><a href="#${sectionID}">${sectionDN}</a></li>`;
+              };
 };
 
-//Removing the active class
-const removeActive = (section) => {
-    section.classList.remove('your-active-class');
-};
 
-//Adding the active class
-const addActive = (condition, section) => {
-    if(condition){
-        section.classList.add('your-active-class');
+
+//__________Add class 'active' to section when near top of viewport__________________________________________
+window.addEventListener('scroll', function() {
+    for (section of sections) {
+        let position = section.getBoundingClientRect();
+
+        if((position.top >= 0 && position.bottom < window.innerHeight)/* || (position.top < window.innerHeight && position.bottom >= 0)*/) {
+	        section.classList.add('your-active-class');
+            } else {
+                section.classList.remove('your-active-class');
+        };
     };
-};
+});
 
-//Implementing the actual function
-const sectionActivation = () => {
-    sections.forEach(section => {
-        const elementOffset = offset(section);
-        
-        inviewport = () => elementOffset < 150 && elementOffset >= -150;
-        addActive(inviewport(), section);
-        
-        removeActive(section);
-        addActive(inviewport(), section);
-    });
-};
 
-window.addEventListener('scroll', sectionActivation);
+
+// Build menu 
+navBuild(sections);
