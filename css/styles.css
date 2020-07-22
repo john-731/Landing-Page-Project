@@ -14,12 +14,6 @@ html {
   scroll-behavior: smooth;
 }
 
-a.your-active-class {
-    color: cadetblue;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-bottom: 3px solid cadetblue;
-}
 
 table {
     border: 1px solid black;
@@ -98,10 +92,12 @@ section {
     padding: 2%;
 }
 
+
 .navbar__menu li a {
     color:black;
     text-decoration: none;
     font-family: sans-serif;
+    font-weight: 400;
 }
 
 .navbar__menu .menu__link {
@@ -112,9 +108,21 @@ section {
 
 .navbar__menu .menu__link:hover {
     display: inline-block;
+    border-bottom: 1px solid cadetblue ;
+    color: white;
+    transition: ease 0.3s all;
+}
+
+.navbar__menu .menu__link__active {
+    /*display: inline-block;
     background: #333;
     color: #fff;
-    transition: ease 0.3s all;
+    transition: ease 0.3s all;*/
+    
+    color: cadetblue;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: 3px solid cadetblue;
 }
 
 /* Header Styles */
