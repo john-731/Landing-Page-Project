@@ -1,7 +1,7 @@
 //__________Defining global variables________________________________________________________________________
 const sections = document.querySelectorAll('section');
 const list = document.getElementById('navbar__list');
-const links = document.querySelectorAll('a');
+const links = document.querySelectorAll('ul li a');
 
 
 //__________Building the nav_________________________________________________________________________________
@@ -25,16 +25,10 @@ window.addEventListener('scroll', function() {
 	        section.classList.add('your-active-class') ;
             } else {
                 section.classList.remove('your-active-class');
+                links.classList.add('your-active-class');
         };
     };
 });
-
-
-
-//__________Add class 'active' to the navigation items_______________________________________________________
-list.addEventListener('click', function() {
-    links.classList.add('your-active-class');
-    });
 
 
 
