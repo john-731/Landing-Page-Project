@@ -21,9 +21,7 @@ window.addEventListener('scroll', function() {
 
         if(position.top >= 0 && position.bottom < window.innerHeight) {
 	        section.classList.add('your-active-class') ;
-            //document.getElementById('section2z').classList.add('menu__link__active');
-            /*linkID = */document.getElementById(`${section.id}z`).classList.add('menu__link__active');
-            //linkID.classList.add('menu__link__active');
+            document.getElementById(`${section.id}z`).classList.add('menu__link__active');
             } else {
                 section.classList.remove('your-active-class');
                 document.getElementById(`${section.id}z`).classList.remove('menu__link__active');
