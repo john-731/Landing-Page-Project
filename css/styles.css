@@ -114,11 +114,6 @@ section {
 }
 
 .navbar__menu .menu__link__active {
-    /*display: inline-block;
-    background: #333;
-    color: #fff;
-    transition: ease 0.3s all;*/
-    
     color: cadetblue;
     font-size: 1.1em;
     font-weight: bold;
